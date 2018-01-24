@@ -83,54 +83,62 @@
   let entrada = '',
     current = '',
     ans = '',
-    output = '',
-    flag = false;
+    output = '';
+    
 
-    console.log(flag);
+   
 
-  $('button').click(function () { // Pega o valor do Botão
+// Pega o valor do Botão
+
+  $('button').click(function () { 
     entrada = $(this).attr('value');
-    console.log('Valor entrado: ' + entrada);
+    console.log(`Valor entrado: ${entrada}`);
 
-    if (Number(entrada) || entrada === '.' || entrada === '0') { //Se a entrada for um número ou '.' ou 0 adiciona a 'entrada' ao current
+//Se a entrada for um número ou '.' ou 0 adiciona a 'entrada' ao current
+
+    if (Number(entrada) || entrada === '.' || entrada === '0') { 
       current += entrada;
-      console.log(' O numero atual (current) é: ' + current);
+      console.log(`Valor atual: ${current}`);
 
-      $('#display').val(current); //Adiciona o current ao #display
+//Adiciona o current ao #display      
 
-    } 
+      $('#display').val(current); 
+    }    
+
+// Tratando o current para não ter operação repetida (gambiarra, voltar aqui quando tiver mais conhecimento)
+
+if (current.substr(current.length - 1) === '+' || current.substr(current.length - 1) === '-' 
+|| current.substr(current.length - 1) === '/'  || current.substr(current.length - 1) === '*' ){
+
+  (current.substr(current.length - 1)) = '';
+
+}  
     
-    // else if (current !== Number(entrada) || current !== '.') {
-    //   flag = true;
-    //   console.log(flag);
-    // } 
-    
-    else if (entrada === '+' || entrada === '-' || entrada === '*' || entrada === '/') { // Executando operações matemáticas
-      flag = true;
-      console.log(flag);
+// Executando operações matemáticas    
+       
+    if (entrada === '+' || entrada === '-' || entrada === '*' || entrada === '/' || entrada === '=') { 
+      
+      
       output = current += entrada;
-      console.log('O output é: ' + output);
+      console.log(`Output geral ${output}`);           
 
+      const answer = () => {
 
-      function answer() {
+// Remove o operador da ultima posição da string para não causar erro no eval()         
 
-        semOperador = output.slice(0, -1); // Remove o operador da ultima posição da string para não causar erro no eval() 
+        semOperador = output.slice(0, -1); 
 
         x = semOperador
         x = eval(x)
         semOperador = x;
 
-        console.log(`res do eval: ${semOperador}`);
+        console.log(`Resultado atual: ${semOperador}`);
 
         $('#display-mem').val(semOperador);
       }
 
       answer();
-
-      else if (flag === true) {
-      current = '';
-      
-    }
+     
     } 
 
   });
