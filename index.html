@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+
+
+
+  <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+
+
+
+  <style>
+    .container {
+      background-color: blue;
+      display: grid;
+      grid-template-columns: 65px 65px 65px 65px;
+      grid-template-rows: 65px 30px 65px 65px 65px 65px 65px;
+      grid-gap: 5px;
+    }
+
+    body {
+      background-color: grey;
+      height: 485px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .item {
+      background-color: #1EAAFC;
+    }
+
+    .display {
+      grid-column-start: 1;
+      grid-column-end: -1;
+    }
+    
+    .item0 {
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+
+    .itemEq {
+      grid-column: 4;
+      grid-row-start: 6;
+      grid-row-end: 8;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <input type="text" id='display-mem' class="item display" disabled value="0">
+    <input type="text" id='display' class="item display" disabled value="0">
+    <button class="item itemAC" value="ac">AC</button>
+    <button class="item itemCE" value="ce">CE</button>
+    <button class="item item/" value="/">/</button>
+    <button class="item itemX" value="* ">X</button>
+    <button class='item item8' value='7'>7</button>
+    <button class="item item7" value='8'>8</button>
+    <button class="item item9" value="9">9</button>
+    <button class="item item-" value="-">-</button>
+    <button class="item item4" value="4">4</button>
+    <button class="item item5" value="5">5</button>
+    <button class="item item6" value="6">6</button>
+    <button class="item item+" value="+">+</button>
+    <button class="item item1" value="1">1</button>
+    <button class="item item2" value="2">2</button>
+    <button class="item item3" value="3">3</button>    
+    <button class="item itemEq" value="=">=</button>
+    <button class="item item0" value="0">0</button>
+    <button class="item item." value=".">.</button>
+
+  </div>
+</body>
+<script type="text/javascript">
+  console.log('Olá Calculadora!');
+
+  let entrada = '',
+    current = '',
+    ans = '',
+    output = '';
+
+
+
+
+  $('button').click(function () { // Pega o valor do Botão
+    entrada = $(this).attr('value');
+    console.log('Valor entrado: ' + entrada);
+
+    if (Number(entrada) || entrada === '.' || entrada === '0') { 
+      current += entrada;
+      console.log('numero atual é: ' + current);
+
+      $('#display').val(current);
+
+    }
+
+    else if (entrada === '+' || entrada === '-' || entrada === '*' || entrada === '/') {
+
+      output = current += entrada;
+      console.log('O output é: ' + output);
+      
+
+     function answer (){
+
+      semOperador = output.slice(0, -1); // Remove o operador da string para evitar erro 
+
+      console.log('output na fun '+ semOperador);
+
+        x = semOperador
+        x = eval(x)
+        semOperador = x;
+      console.log(`res do eval ${semOperador}`);
+      $('#display-mem').val(semOperador);
+     }
+
+   // =   answer();
+     answer();
+     
+    }
+
+
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+  // let newValue = [], result = 0;
+  // displayOutput = document.getElementById('display');
+  // clearButton = document.getElementById('clear-btn');
+  // oppositeButton = document.getElementById('op-btn');
+
+  // clearButton.addEventListener('click', function(){
+  //   console.log('clique');
+  //   displayOutput.value = '0';
+  // })
+
+  //   // oppositeButton.addEventListener('click', function(){
+  //   //   console.log('clique');
+  //   //   displayOutput.value = parseFloat(displayOutput.value) * -1;
+  //   // })
+
+  // const addToDisplay = (num) => {
+  //   displayOutput.value = displayOutput.value + num;
+  // }
+
+  // const operations = (op) => {
+  //    newValue = displayOutput.value ; //funciona
+  //   //newValue.push(displayOutput.value);
+  //   console.log(newValue);
+  //   console.log( displayOutput.value);
+  //   displayOutput.value = '';
+
+  // }
+</script>
+
+</html>
