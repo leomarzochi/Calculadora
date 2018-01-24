@@ -38,7 +38,7 @@
       grid-column-start: 1;
       grid-column-end: -1;
     }
-    
+
     .item0 {
       grid-column-start: 1;
       grid-column-end: 3;
@@ -70,7 +70,7 @@
     <button class="item item+" value="+">+</button>
     <button class="item item1" value="1">1</button>
     <button class="item item2" value="2">2</button>
-    <button class="item item3" value="3">3</button>    
+    <button class="item item3" value="3">3</button>
     <button class="item itemEq" value="=">=</button>
     <button class="item item0" value="0">0</button>
     <button class="item item." value=".">.</button>
@@ -83,88 +83,57 @@
   let entrada = '',
     current = '',
     ans = '',
-    output = '';
+    output = '',
+    flag = false;
 
-
-
+    console.log(flag);
 
   $('button').click(function () { // Pega o valor do Botão
     entrada = $(this).attr('value');
     console.log('Valor entrado: ' + entrada);
 
-    if (Number(entrada) || entrada === '.' || entrada === '0') { 
+    if (Number(entrada) || entrada === '.' || entrada === '0') { //Se a entrada for um número ou '.' ou 0 adiciona a 'entrada' ao current
       current += entrada;
-      console.log('numero atual é: ' + current);
+      console.log(' O numero atual (current) é: ' + current);
 
-      $('#display').val(current);
+      $('#display').val(current); //Adiciona o current ao #display
 
-    }
-
-    else if (entrada === '+' || entrada === '-' || entrada === '*' || entrada === '/') {
-
+    } 
+    
+    // else if (current !== Number(entrada) || current !== '.') {
+    //   flag = true;
+    //   console.log(flag);
+    // } 
+    
+    else if (entrada === '+' || entrada === '-' || entrada === '*' || entrada === '/') { // Executando operações matemáticas
+      flag = true;
+      console.log(flag);
       output = current += entrada;
       console.log('O output é: ' + output);
-      
 
-     function answer (){
 
-      semOperador = output.slice(0, -1); // Remove o operador da string para evitar erro 
+      function answer() {
 
-      console.log('output na fun '+ semOperador);
+        semOperador = output.slice(0, -1); // Remove o operador da ultima posição da string para não causar erro no eval() 
 
         x = semOperador
         x = eval(x)
         semOperador = x;
-      console.log(`res do eval ${semOperador}`);
-      $('#display-mem').val(semOperador);
-     }
 
-   // =   answer();
-     answer();
-     
+        console.log(`res do eval: ${semOperador}`);
+
+        $('#display-mem').val(semOperador);
+      }
+
+      answer();
+
+      else if (flag === true) {
+      current = '';
+      
     }
-
+    } 
 
   });
-
-
-
-
-
-
-
-
-
-
-
-
-  // let newValue = [], result = 0;
-  // displayOutput = document.getElementById('display');
-  // clearButton = document.getElementById('clear-btn');
-  // oppositeButton = document.getElementById('op-btn');
-
-  // clearButton.addEventListener('click', function(){
-  //   console.log('clique');
-  //   displayOutput.value = '0';
-  // })
-
-  //   // oppositeButton.addEventListener('click', function(){
-  //   //   console.log('clique');
-  //   //   displayOutput.value = parseFloat(displayOutput.value) * -1;
-  //   // })
-
-  // const addToDisplay = (num) => {
-  //   displayOutput.value = displayOutput.value + num;
-  // }
-
-  // const operations = (op) => {
-  //    newValue = displayOutput.value ; //funciona
-  //   //newValue.push(displayOutput.value);
-  //   console.log(newValue);
-  //   console.log( displayOutput.value);
-  //   displayOutput.value = '';
-
-  // }
 </script>
 
 </html>
